@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/authservice.service';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'myrent';
+  title = 'RentNaija';
+  constructor(
+    public authservice: AuthService) { 
+    }
 }

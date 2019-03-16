@@ -1,0 +1,53 @@
+<div >
+    <div *ngIf="tenantid != null ">
+        <div *ngIf="try > 15 " class="alert alert-info">
+            You Have <strong>{{try}} Days</strong> Remaining <br />
+        </div>
+        <div *ngIf="try <= 15 " class="alert alert-danger">
+          You Have <strong>{{try}} Days</strong> Remaining <br />
+      </div>
+      <div *ngIf="test === try" class="alert alert-danger">
+        Your are due for payment 
+        You Have Have Used <strong> {{try}} Days</strong>  
+        <button>Pay Now</button><br />
+    </div>
+        <div class="card-columns">
+          <div class="card bg-light">
+            <div class="card-header">
+              <h5>EMERGENCY</h5>
+            </div>
+            <div class="card-body">
+              FRSC:- 122<br />
+              LES:- 112<br />
+              SSS:- 9<br />
+            </div>
+          </div>
+        
+          <div class="card bg-light" *ngIf="ownerid">
+            <div class="card-header">
+                <h5>MY LANDLORD</h5>
+            </div>
+            <div class="card-body">
+              <div  *ngFor="let me of allusers ">
+                    <p *ngIf="me.id === ownerid"> 
+                      FullName:-{{me.firstname}} {{me.lastname}} <br />
+                      Phone Number:-{{me.phonenumber}} <br />
+                      Email:-{{me.email}} 
+                    </p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    </div>
+
+  
+    
+</div>
+
+<div *ngIf="iftenant === null || +iftenant === 0  ">
+    <div class="alert alert-info">
+        You Have Not <strong>Occupy Any Property</strong> Remaining 
+    </div>
+   <h5> Find <a routerLink="/hostel">Hostel</a> / <a routerLink="/hotel">Hotel </a> / <a routerLink="/rent">Accomodation</a> Near You... </h5>
+  </div>

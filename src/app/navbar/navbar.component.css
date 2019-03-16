@@ -1,0 +1,11 @@
+.navbar-toggle {
+    /* margin-top: 19px; */
+    /* margin-bottom: 19px; */
+    border: 0;
+}
+
+@media only screen and (max-width:1000px) { 
+    .clone{
+        display: none;
+    }
+}

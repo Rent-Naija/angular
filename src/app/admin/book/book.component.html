@@ -1,0 +1,44 @@
+<p>
+  Go to Dashboard
+  Convey Your Property from old property to new one <br /></p>
+
+    
+      <div class="alert alert-success" *ngIf="paymentsuccess">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          Payment  Successfully Added!!
+      </div>
+      
+          
+          <div *ngFor="let k of this.clickedproperty">
+                Are You Sure You want to book {{k.name}} 
+                <br />
+                <button (click)="newBook()">
+                      Book Now
+                  </button>
+            </div>
+      
+      
+      <!--
+      <div *ngIf="price != null">
+
+        <div *ngFor="let k of this.price">
+                
+            {{k.price}} {{refernce}}
+        
+            <angular4-paystack-embed
+            [key]="'pk_test_1f750c2cf4daecbb85ba0c57189cacd116590266'"
+            [email]="'demo@email.com'"
+            [amount]="k.price * 100 "
+            [ref]="'refernce'"
+            [class]="'btn btn-primary'"
+            (close)="paymentCancel()"
+            (callback)="paymentDone($event)"
+        ></angular4-paystack-embed>
+        
+    </div>
+      </div>
+      -->
+      
+
+ 
+

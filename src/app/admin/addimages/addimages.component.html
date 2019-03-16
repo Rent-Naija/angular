@@ -1,0 +1,67 @@
+<div class="row" >
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+            Add your Images to your property
+        </div>
+        <div class="col-sm-8 shadow" style="padding-top:10px;">
+
+<div class="alert alert-success" *ngIf="formsuccess">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    Image Successfully Added!!
+</div>
+<form #form=ngForm 
+(ngSubmit)="onSubmits(propertyid,imgurl,type,height,width,length)" 
+autocomplete="off">
+<div class="form-group">
+        <label>Select Property e.g 3 Bed room Flat</label>
+        <select name="propertyid" #propertyid="ngModel" [(ngModel)]="_service.formData.id"
+            class="form-control">
+          <option *ngFor="let c of list" [value]="c.id">
+            {{c.name}}
+          </option>
+        </select>
+      </div>
+ <div class="form-group">
+        <label>Select An Image</label>
+    <input type="file"  #imgurl accept="image/*"
+    (change)="handleFileInput($event.target.files)">
+ 
+
+</div>
+<div class="form-group">
+      <label>Type e.g palor, sitting room, toilet e.t.c</label>
+      <input  name="type" #type="ngModel" [(ngModel)]="adminservice.imgData.type" class="form-control" type="text" required>
+         </div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Height</label>
+        <input  name="height" 
+        #height="ngModel" 
+        [(ngModel)]="adminservice.imgData.height"
+        class="form-control" 
+        type="text" required>
+      </div>
+  <div class="form-group col-md-6">
+      <label>Width</label>
+      <input  name="width" 
+      #width="ngModel" [(ngModel)]="adminservice.imgData.width"
+      class="form-control" type="text" required>
+  </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Length</label>
+        <input  name="length" 
+        #length="ngModel" [(ngModel)]="adminservice.imgData.length"
+        class="form-control" 
+        type="text" required>
+      </div>
+</div>
+  
+
+<div class="form-group">
+  <button type="submit" class="btn btn-lg btn-block" [disabled]="form.invalid">Submit</button>
+</div>
+</form>
+</div>
+</div>
+

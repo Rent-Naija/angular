@@ -1,0 +1,316 @@
+
+<div *ngFor="let p of property">
+    <img class="card-img-top" [src]="[propertyUrl+p.coverphoto]" alt="Card image cap" height="200px">
+    <span>{{p.name}}</span>
+</div>
+<ngb-tabset style="padding-left: 10px;">
+    <ngb-tab title="ABOUT">
+      <ng-template ngbTabContent >
+        <div style="padding-left: 5px;"  *ngFor="let p of property" >
+                <div>
+                  <div class="card-header" style="border: 2px solid bisque;">
+                    <h5>PROPERTY INFO</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> Name:- </b></span>
+                      <span class="col-sm-6">{{p.name}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> OwnerID:- </b></span>
+                      <span class="col-sm-6">{{p.ownerid}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> SAgentID:- </b></span>
+                      <span class="col-sm-6">{{p.sagentid}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> Price:- </b></span>
+                      <span class="col-sm-6">&#8358; {{p.price}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> Type:- </b></span>
+                      <span class="col-sm-6">{{p.type}}</span>
+                    </div>
+                    <div class="row" *ngIf="p.state">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> State:- </b></span>
+                      <span class="col-sm-6">{{p.state}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> City:- </b></span>
+                      <span class="col-sm-6">{{p.city}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> Address:- </b></span>
+                      <span class="col-sm-6">{{p.address}}</span>
+                    </div>
+                    <div class="row">
+                      <span class="col"><b><fa-icon icon="shower"></fa-icon> Description:- </b></span>
+                      <span class="col-sm-6">{{p.description}}</span>
+                    </div>
+                    <p>Added Date:- {{p.created_at | date}} | Updated Date:- {{p.updated_at | date}}</p>
+                    
+                              <b style="font-size: 20px">Key Places</b> 
+                      
+                      <div *ngFor="let m of propertyinfo">
+                          <span *ngIf="m.hospital > 0" style="padding-right: 30px;">
+                              <fa-icon icon="check-circle"></fa-icon>
+                              Hospital 
+                          </span>
+                          <span *ngIf="m.security > 0" style="padding-right: 30px;">
+                            <fa-icon icon="check-circle"></fa-icon>
+                            Security 
+                        </span>
+                        <span *ngIf="m.goffice > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Government Office
+                        </span>
+                        <span *ngIf="m.church > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Church 
+                        </span>
+                        <span *ngIf="m.mosque > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Mosque 
+                        </span>
+                        <span *ngIf="m.gymcenter > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Gym Center 
+                        </span>
+                        <span *ngIf="m.hairsaloon > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Hair Saloon
+                        </span>
+                        <span *ngIf="m.resturant > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Resturant
+                        </span>
+                        <span *ngIf="m.hotel > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Hotel
+                        </span>
+                        <span *ngIf="m.market > 0" style="padding-right: 30px;">
+                          <fa-icon icon="check-circle"></fa-icon>
+                          Market
+                        </span>
+                      </div><br />
+                    <a [routerLink]="['/admin/addproperty', p.id]" 
+                    class="btn-NG btn-default-NG ">Edit Property</a>
+                    
+                  </div>
+                </div>
+          
+                <div *ngIf="allsubproperties">
+                    <button (click)="newsub()" class="btn-NG btn-default-NG">Add Sub property</button><br />
+                </div>
+                <br />
+              <div *ngIf="newsubp">
+                  <button (click)="oddsub()" class="btn-NG btn-default-NG">Done / Finish</button>
+                <app-subproperty></app-subproperty>
+              </div>
+            
+            
+            <div *ngIf="allsubproperties != null && !newsubp">
+         
+                 
+                    <div class="card-columns">
+                      <div class="card bg-light" *ngFor="let sub of allsubproperties">
+                        <img class="card-img-top card-header" [src]="[subUrl+sub.coverphoto]">
+                        <div class="card-body">
+                          <b>&nbsp;&nbsp;{{sub.name}}</b><br />
+                       Spaces: {{sub.available}}
+                          <span *ngIf="sub.bathroom == 1" style="padding-left: 5px;padding-right: 5px;">
+                              <fa-icon icon="shower"></fa-icon>
+                            {{sub.bathroom}} BathRoom <br />
+                          </span>
+                        <span *ngIf="sub.bathrooms > 1" style="padding-left: 5px;padding-right: 5px;">
+                            <fa-icon icon="shower"></fa-icon>
+                          {{sub.bathroom}} BathRooms <br />
+                        </span>
+                          <span *ngIf="sub.room == 1" style="padding-right: 5px;">
+                              <fa-icon icon="bed"></fa-icon>
+                              {{sub.room}} Bed <br />
+                            </span>
+                          <span *ngIf="sub.room > 1" style="padding-right: 5px;">
+                            <fa-icon icon="bed"></fa-icon>
+                            {{sub.room}} Beds <br />
+                          </span>
+                          <span *ngIf="sub.garage == 1" style="padding-right: 5px;">
+                              <fa-icon icon="car"></fa-icon>
+                              {{sub.garage}} Garage <br />
+                            </span>
+                          <span *ngIf="sub.garage > 1" style="padding-right: 5px;">
+                            <fa-icon icon="car"></fa-icon>
+                            {{sub.garage}} Garages <br />
+                          </span>
+                          <span *ngIf="sub.toilet == 1" style="padding-right: 5px;">
+                              <fa-icon icon="toilet"></fa-icon>
+                              {{sub.toilet}} Toilet <br />
+                            </span>
+                            <span *ngIf="sub.toilet > 1" style="padding-right: 5px;">
+                              <fa-icon icon="toilet"></fa-icon>
+                              {{sub.toilet}} Toilets <br />
+                            </span><br />
+              
+                            <button (click)="deleteSubProperty(sub.id)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+        
+            </div>
+           
+            
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab>
+      <ng-template ngbTabTitle>PHOTOS</ng-template>
+      <ng-template ngbTabContent>
+          <div class="card-header" style="border: 2px solid bisque;">
+              <span class="float-right ">
+                  <button (click)="newimage()"  class="btn-NG btn-sm btn-default-NG">+</button>
+                </span>
+              <h5>ALL PHOTOS</h5>
+            </div>
+        <div class="row" *ngIf="!addimage">
+            <div class="col">
+                <div class="gallery" *ngFor="let l of imglist">
+                    <a  href="#">
+                <img [src]="l.imgurl" alt="Cinque Terre" width="300px" height="200px">
+                    </a>
+                    <div class="desc">
+                        Height - {{l.height}}<br />
+                        Width - {{l.width}}<br />
+                        Length - {{l.length}}<br />
+                        <button (click)="onDelete(l.id)" class="btn btn-sm btn-outline-danger">X</button>
+                    </div>
+                  </div>
+             </div>
+        </div>
+        <div *ngIf="addimage">
+            <button (click)="doneimage()"  class="btn-NG btn-sm btn-default-NG">Finish / Done</button>
+          <admin-addimages></admin-addimages>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab>
+      <ng-template ngbTabTitle>TENANTS
+        <span class="badge badge-pill badge-info" *ngIf="ptenants"> {{ptenants.length}}</span>
+      </ng-template>
+      <ng-template ngbTabContent>
+          <div class="card-header" style="border: 2px solid bisque;">
+              <h5>PROPERTY TENANTS</h5>
+            </div>
+       
+        <div class="row">
+            <div class="col">
+                <div  *ngFor="let me of allusers ">
+                    <div  *ngFor="let t of ptenants ">
+                      <div *ngIf="me.id == t.userid"> 
+                          <!-- Media middle -->
+                          <div class="media mt-3" style="border:1px solid black">
+                              <img [src]="me.profileimage" class="align-self-center mr-3" style="width:60px">
+                              <div class="media-body">
+                                  <h5><b>{{me.firstname}} {{me.lastname}}</b></h5>
+                                  Email: {{me.email}}<br />
+                                  Phone Number: {{me.phonenumber}}<br />
+                                  Expired date: {{t.created_at}}<br />  
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+             </div>
+        </div>
+        <p *ngIf="ptenants === null">dsds</p>
+
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab>
+      <ng-template ngbTabTitle>COMPLAINS 
+        <span class="badge badge-pill badge-info" *ngIf="pcomplains"> {{pcomplains.length}}</span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <p>All Complains: </p>
+         
+      <div class="row">
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+          <b style="border-bottom:2px solid black">All Complains</b> 
+            <div *ngFor="let c of pcomplains ">
+              <div *ngFor="let me of allusers ">
+                <div *ngIf="me.id == c.userid"> 
+                  <form #form="ngForm" (submit)="getcthread(form)" autocomplete="off">
+                    <div class="form-group">
+                      <input type="hidden" name="ticket_id"
+                            [(ngModel)]="c.ticket_id" class="form-control">
+                    </div>
+                    <div class="form-group text-left">
+                          <button type="submit" class="btn btn-block btn-default-NG " [disabled]="form.invalid">
+                              {{c.title}} <br />
+                              <span class="badge badge-success">{{c.status}} </span>
+                            
+                          </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 shadow" style="padding-top:10px;" >
+
+           <div *ngIf="ticketdetail " >
+              <div *ngFor="let tc of Category" >
+                  <div *ngIf="tc.id === ticketdetail.category_id">
+                    <p class="text-center" style="border-bottom:2px solid black">
+                      {{ticketdetail.title}} - {{ticketdetail.ticket_id}} <br />
+                      {{tc.name}} - {{ticketdetail.priority}}</p>
+                  </div>
+          </div>
+                <!--main body of ticket-->
+                <div style="height: 40%">
+                    {{ticketdetail.message}}
+                    <div *ngFor="let c of ticketcomment" >
+                        <div [class]="authservice.Uid === c.user_id  ? 'text-right' : 'text-left' ">
+                           {{c.comment}} - {{c.user_id}} 
+                        </div>
+                     </div>
+                </div>
+              
+                <!--comment box-->
+                <div style="border-top:2px solid black" >
+                <form #form="ngForm" (submit)="newComment(form)" autocomplete="off">
+                    <div class="form-group">
+                        <input type="hidden" name="user_id"
+                        [(ngModel)]="authservice.Uid" class="form-control">
+                        </div>
+                    <div class="form-group">
+                        <input type="hidden" name="ticket_id"
+                        [(ngModel)]="ticketdetail.ticket_id" class="form-control">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                           <div class="custom-file">
+                                <input required name="comment" #comment="ngModel" 
+                                [(ngModel)]="title" class="form-control">
+                            </div> 
+                            <div class="input-group-append">
+                              <button type="submit" class=" input-group-text" [disabled]="form.invalid">Submit</button>
+                            </div>
+                          </div>
+                  </form>
+                </div>
+                
+                </div><br /><br />
+            
+        </div>
+     </div>
+      </ng-template>
+    </ngb-tab>
+
+  </ngb-tabset>
+
+

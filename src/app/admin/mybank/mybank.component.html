@@ -1,0 +1,46 @@
+<div>
+  Your Bank Details
+  <table class="table table-hover">
+    <tr>
+      <td>Bankname</td>
+      <td>Account Number</td>
+      <td>Account Name</td>
+    </tr>
+    <tr *ngFor="let l of bankinfo">
+      <td (click)="populateForm(l)">{{ l.bankname }}</td>
+      <td (click)="populateForm(l)">{{l.acctno}}</td>
+      <td (click)="populateForm(l)">{{l.acctname}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+        <div class="alert alert-success" *ngIf="formsuccess">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Bank Details Successfully Added!!
+        </div>
+    
+      <div class="form-group">
+        <input type="hidden" name="userid" #userid="ngModel" [(ngModel)]="adminservice.bankd.userid" class="form-control">
+       </div>
+      <div class="form-group">
+        <label>Bank Name</label>
+        <input name="bankname" #bankname="ngModel" [(ngModel)]="adminservice.bankd.bankname" class="form-control">
+        <div class="alert alert-danger" *ngIf="bankname.invalid && bankname.touched"> This Field is required</div>
+      </div>
+      <div class="form-group">
+        <label>Account Number</label>
+        <input name="acctno" #acctno="ngModel" [(ngModel)]="adminservice.bankd.acctno" class="form-control">
+        <div class="alert alert-danger" *ngIf="acctno.invalid && acctno.touched"> This Field is required</div>
+      </div>
+      <div class="form-group">
+        <label>Account Name</label>
+        <input name="acctname" #acctname="ngModel" [(ngModel)]="adminservice.bankd.acctname" class="form-control">
+        <div class="alert alert-danger" *ngIf="acctname.invalid && acctname.touched"> This Field is required</div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default-NG " [disabled]="form.invalid">Submit</button>
+      </div>
+    </form>
+</div>

@@ -1,0 +1,80 @@
+
+<div>
+    
+  <admin-property-list *ngIf="roleid != 1"></admin-property-list>
+  <app-tenants *ngIf="roleid == 1"></app-tenants>
+
+    <div *ngIf="!editing">
+        <!-- Media middle -->
+  <div class="media mt-3">
+        <img [src]="[imageUrl+profileimage]" class="align-self-center mr-3" style="width:60px">
+        <div class="media-body">
+          <h4>MY INFO:</h4>
+          <span><b>Full Name:</b> {{firstname}} {{lastname}}</span><br />
+          <span><b>Phone Number:</b> {{phonenumber}}</span><br />
+          <span><b>Email:</b> {{email}}</span><br />
+          <span><b>My ID:</b> {{id}}</span><br />
+              <span *ngFor="let act of Acctype" >
+                      <span *ngIf="roleid == act.id">
+                              <b>My Role:</b>    {{act.name}}
+                      </span>
+              </span><br />
+          <button class="btn-NG btn-default-NG" (click)="onEdit()">Edit</button><br /><br />
+        </div>
+       </div>
+    </div>
+
+    <div *ngIf="editing">
+            <h4>Edit INFO: <button class="btn-NG btn-default-NG" (click)="onCancel()">Cancel</button></h4>
+        <form #form=ngForm 
+(ngSubmit)="onSubmit(efirstname,elastname,ephonenumber,eprofileimage,eemail,epassword,eroleid,euserid)" 
+        autocomplete="off">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>First Name</label>
+                <input  name="firstname" #fistname="ngModel" 
+                [(ngModel)]="efirstname"  class="form-control" type="text" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Last Name</label>
+                <input  name="lastname" #lastname="ngModel" 
+                [(ngModel)]="elastname"  class="form-control" type="text" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phonenumber">Phone Number:</label>
+            <input name="phonenumber" #phonenumber="ngModel" [(ngModel)]="ephonenumber" type="text" 
+            class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Select An Image</label>
+            <input type="file"  #profileimage accept="image/*"
+            (change)="handleFileInput($event.target.files)"> 
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input name="email" #email="ngModel" [(ngModel)]="eemail" type="email" 
+            class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input name="password" #password="ngModel" [(ngModel)]="epassword" type="password" 
+            class="form-control" required>
+        </div>
+            <div class="form-group">
+                <input type="hidden" name="roleid" #roleid="ngModel" [(ngModel)]="eroleid" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="userid" #userid="ngModel" [(ngModel)]="euserid" class="form-control">
+            </div>
+        <div class="form-group">
+            <button type="submit" class="btn-NG btn-default-NG btn-lg ">Save</button>
+        </div>
+        </form>
+        <br /><br />
+    </div>
+       
+</div>
+
+
+    

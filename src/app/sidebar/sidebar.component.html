@@ -1,0 +1,61 @@
+<div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
+
+  <!--
+
+      Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+      Tip 2: you can also add an image using data-image tag
+
+  -->
+
+  <div class="sidebar-wrapper">
+      <div class="logo">
+          <a routerLink="/" class="simple-text">
+              RentNaija
+          </a>
+      </div>
+
+      <ul class="nav">
+          <!--class="active"-->
+          <div>
+            <li routerLinkActive="active" >
+                <a routerLink="/admin">
+                  <p style="padding-right: 30px"><fa-icon icon="home"></fa-icon>
+                   Dashboard </p>
+                </a>
+            </li>
+          </div>
+         <div *ngIf="authservice.roleid != 1">
+                    <li routerLinkActive="active" >
+                        <a  routerLink="admin/addproperty">
+                            <p><fa-icon icon="city"></fa-icon>
+                            New property</p>
+                        </a>
+                    </li>    
+                    <li routerLinkActive="active" >
+                      <a routerLink="admin/subproperty">
+                          <i class="pe-7s-graph"></i>
+                          <p style="padding-right: 30px">Sub property </p>
+                      </a>
+                  </li>
+                  <li routerLinkActive="active" >
+                        <a routerLink="admin/mybank">
+                            <p><fa-icon icon="building"></fa-icon>
+                            My Bank</p>
+                        </a>
+                    </li>
+          </div>
+            
+          
+          <li routerLinkActive="active" >
+            <a routerLink="admin/complains">
+                <p style="padding-right: 40px">
+                    <fa-icon icon="comments"></fa-icon>
+                    My Complains </p>
+            </a>
+        </li>
+       
+          
+
+      </ul>
+</div>
+  </div>

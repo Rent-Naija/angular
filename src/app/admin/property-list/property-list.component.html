@@ -1,0 +1,41 @@
+<div class="alert alert-success">
+  Welcome <strong>Oga!</strong> Landlord
+</div>
+
+<input #query 
+(keyup)="filter(query.value)" 
+type="text" class="form-control" placeholder="search..."><br />
+<span>
+    <span class="float-right ">
+        <button routerLink="addproperty" class="btn-NG btn-sm btn-default-NG">Add</button>
+      </span>
+    <h5>MY PROPERTIES</h5>
+</span>
+
+<table class="table table-hover" *ngIf="filteredProperties != null">
+    <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let l of filteredProperties">
+              <td>{{l.viewid}} </td>
+            <td>{{l.name}} </td>
+            <td>{{l.type}} </td>
+            <td>
+              <a (click)="onApproval(l.id)" *ngIf="l.approval == 0 && userrole === 6" 
+              class="btn btn-success btn-sm">Approve</a>
+              &nbsp;
+              <a (click)="onDelete(l.id)" class="btn btn-danger btn-sm">Delete</a>
+              &nbsp;
+              <a [routerLink]="['/admin/pp',l.id]" 
+            class="btn-NG btn-default-NG btn-sm ">View Property</a></td>
+          </tr>
+      </tbody>
+ 
+</table>
+<h4 *ngIf="filteredProperties == null" class="text-center">No Property To Show</h4>

@@ -1,0 +1,192 @@
+<app-menu></app-menu>
+<div class="container shadow" style="background-color:white;">
+    <div class="row" style="margin-left:px;margin-top:10px;">
+       <ngb-carousel *ngIf="propertyImg" 
+       style="width:100%;" class="mx-auto justify-content-center">
+                <ng-template ngbSlide *ngFor="let pi of propertyImg ">
+                  <img [src]="pi.imgurl" alt="Random first slide"
+                  width="1100" height="350">
+                  <div class="carousel-caption">
+                    <h3>{{pi.type}}</h3>
+                    <p *ngIf="pi.height || pi.length || pi.width">
+                      Height: {{pi.height}}
+                      length: {{pi.length}} 
+                      width: {{pi.width}}
+                    </p>
+                  </div>
+                </ng-template>
+            </ngb-carousel>
+     </div>
+   
+  <div class="row" style="margin-left:3px;margin-top:10px;" *ngFor="let p of property ">
+    <div class="col-sm-12">
+            <span *ngIf="p.state"><fa-icon icon="map-marker"></fa-icon>&nbsp; {{p.state}}
+              <h3>{{p.name}}</h3></span>
+            <div><fa-icon icon="map-marker"></fa-icon>&nbsp; {{p.city}}</div>
+            Available Spaces: {{availablesubp}}
+            <span *ngIf="bathrooms == 1" style="padding-left: 5px;padding-right: 5px;">
+                <fa-icon icon="shower"></fa-icon>
+              {{bathrooms}} BathRoom 
+            </span>
+          <span *ngIf="bathrooms > 1" style="padding-left: 5px;padding-right: 5px;">
+              <fa-icon icon="shower"></fa-icon>
+            {{bathrooms}} BathRooms 
+          </span>
+            <span *ngIf="rooms == 1" style="padding-right: 5px;">
+                <fa-icon icon="bed"></fa-icon>
+                {{rooms}} Bed 
+              </span>
+            <span *ngIf="rooms > 1" style="padding-right: 5px;">
+              <fa-icon icon="bed"></fa-icon>
+              {{rooms}} Beds 
+            </span>
+            <span *ngIf="garages == 1" style="padding-right: 5px;">
+                <fa-icon icon="car"></fa-icon>
+                {{garages}} Garage 
+              </span>
+            <span *ngIf="garages > 1" style="padding-right: 5px;">
+              <fa-icon icon="car"></fa-icon>
+              {{garages}} Garages 
+            </span>
+            <span *ngIf="toilets == 1" style="padding-right: 5px;">
+                <fa-icon icon="toilet"></fa-icon>
+                {{toilets}} Toilet 
+              </span>
+              <span *ngIf="toilets > 1" style="padding-right: 5px;">
+                <fa-icon icon="toilet"></fa-icon>
+                {{toilets}} Toilets 
+              </span>
+
+         <div> <fa-icon icon="heart" style="font-size: 24px;"></fa-icon> {{favourites}}
+             <!--check for favourites/likes and change button-->
+             <br />
+             <span *ngIf="authservice.isLoggedIn()">
+                <span  *ngFor="let l of like ">
+                      <button *ngIf="l.like == 1"   
+                        class="btn-NG btn-outline-danger">
+                        <span style="color: Tomato;" 
+                        *ngIf="!displayicon" (click)="addlike()">Like
+                            <fa-icon icon="heart"></fa-icon>{{favourites}}</span>
+                        <span style="color:#36465d;" 
+                        *ngIf="displayicon" (click)="unlike()">Unlike
+                            <fa-icon icon="heart"></fa-icon>{{favourites}}</span>
+                      </button>
+              
+                    <button *ngIf="l.like == 0"  
+                    class="btn-NG btn-outline-danger">
+                    <span style="color: Tomato;" 
+                    *ngIf="displayicon" (click)="addlike()">Like
+                        <fa-icon icon="heart"></fa-icon>{{favourites}}</span>
+                    <span style="color:#36465d;" 
+                    *ngIf="!displayicon" (click)="unlike()">Unlike
+                        <fa-icon icon="heart"></fa-icon>{{favourites}}</span>
+                  </button>
+                </span>
+                
+                   <button *ngIf="like == null"   
+                     class="btn-NG  btn-outline-danger"> 
+                     <span *ngIf="displayicon" (click)="addlike()">Like 
+                       <fa-icon icon="heart"></fa-icon>
+                      </span>
+                     <span *ngIf="!displayicon" (click)="unlike()">
+                       unLike
+                       <fa-icon icon="heart"></fa-icon>
+                     </span>
+                   </button>
+                </span> 
+         </div>   <br />  
+      
+        <div style="border-top: 2px solid black;border-bottom: 2px solid black">
+              <b style="font-size: 20px">About This Space</b> 
+              
+              <div style="padding-top: 5px;">
+                  <b>Address</b>
+                  <p>{{p.address}}</p>
+              </div>
+              <div style="padding-top: 5px;">
+                  <b>Property Description</b>
+                  <p>{{p.description}}</p>
+                  <p>Updated {{p.updated_at | date}}, Added {{p.created_at | date}}</p>
+              </div>
+        </div>
+        <div style="border-bottom: 2px solid black">
+            <b>{{p.type}} Details</b> 
+              <ul class="list-group list-group-flush" *ngFor="let sub of subpropertieslist">
+                  <li class="list-group-item" [class.disabled]="sub.available === '1'">
+                      <div class="row">
+                          <div class="col-sm-2">
+                              <img class="rounded-circle" [src]="subUrl+sub.coverphoto" alt="Card image cap" 
+                              height="100px">
+                              
+                          </div>
+                          <div class="col">
+                          <b>{{sub.name}} </b><br />
+                          {{sub.room}} Room(s) <br />
+                          {{sub.toilet}} Toilet(s) <br />
+                          {{sub.bathroom}} Bathroom(s)
+
+                          <b *ngIf="sub.available === '1'"> - Occupied</b><br />
+                          <a *ngIf="sub.available === '0'" [routerLink]="['/book', p.id, sub.id]" 
+                  class="btn-NG btn-default-NG btn-sm">Book </a>
+                          </div>
+                      </div>
+                    
+                  </li>
+                </ul>
+         
+              
+        </div><br />
+
+        <div  style="padding-bottom:10px;border-bottom: 2px solid black">
+            <b style="font-size: 20px">Key Places</b> 
+            
+            <div *ngFor="let m of moreinfo">
+                <span *ngIf="m.hospital > 0" style="padding-right: 30px;">
+                    <fa-icon icon="check-circle"></fa-icon>
+                    Hospital 
+                </span>
+                <span *ngIf="m.security > 0" style="padding-right: 30px;">
+                  <fa-icon icon="check-circle"></fa-icon>
+                  Security 
+              </span>
+              <span *ngIf="m.goffice > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Government Office
+              </span>
+              <span *ngIf="m.church > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Church 
+              </span>
+              <span *ngIf="m.mosque > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Mosque 
+              </span>
+              <span *ngIf="m.gymcenter > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Gym Center 
+              </span>
+              <span *ngIf="m.hairsaloon > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Hair Saloon
+              </span>
+              <span *ngIf="m.resturant > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Resturant
+              </span>
+              <span *ngIf="m.hotel > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Hotel
+              </span>
+              <span *ngIf="m.market > 0" style="padding-right: 30px;">
+                <fa-icon icon="check-circle"></fa-icon>
+                Market
+              </span>
+            </div>
+      </div><br />
+    
+  </div>
+    
+
+  </div>
+ 
+</div>

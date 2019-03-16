@@ -1,0 +1,85 @@
+<div class="container" style="padding-top:20px;">
+    <!--sub property page-->
+    <div class="row">
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+            Add your property details
+            Please tell us a few details about the accommodation you’d like to list on RentNaija.
+        </div>
+        <div class="col-sm-8 shadow" style="padding-top:10px;">
+            <div class="alert alert-success" *ngIf="formsuccess">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Property Successfully Added!! 
+                <a *ngIf="newp" [routerLink]="['/admin/pp',newp]" 
+            class="btn-NG btn-default-NG btn-sm ">View Property</a>
+            </div>
+            <form #subform=ngForm 
+            (ngSubmit)="submitSub(propertyid,subname,price, room, toilet, garage, bathroom, coverphoto)"
+                autocomplete="off">
+                <div class="form-group">
+                        <label>Select Property e.g 3 Bed room Flat</label>
+                        <select name="propertyid" #propertyid="ngModel" 
+                        [(ngModel)]="adminservice.subpData.propertyid"
+                            class="form-control">
+                          <option *ngFor="let c of list" [value]="c.id">
+                            {{c.name}}
+                          </option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label>Sub Property Name</label>
+                    <input name="subname" #subname="ngModel" 
+                    [(ngModel)]="adminservice.subpData.name" class="form-control"
+                        type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">&#8358;</span>
+                    </div>
+                    <input name="price" #price="ngModel" 
+                    [(ngModel)]="adminservice.subpData.price"
+                    type="text" class="form-control" placeholder="Price" aria-describedby="basic-addon1">
+                    </div>
+              </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="jumbo-p-NG">Room:</label>
+                        <input name="room" #room [(ngModel)]="adminservice.subpData.room" 
+                        type="text" class="form-control" placeholder="Enter No of Rooms" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="jumbo-p-NG">Toilet:</label>
+                        <input name="toilet" #toilet [(ngModel)]="adminservice.subpData.toilet" 
+                        type="text" class="form-control" 
+                        placeholder="Enter no of Toilet" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label  class="jumbo-p-NG">Garage:</label>
+                        <input name="garage" #garage [(ngModel)]="adminservice.subpData.garage" 
+                        type="text" class="form-control" placeholder="Enter No of Garage" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="jumbo-p-NG">Bathroom:</label>
+                        <input name="bathroom" #bathroom [(ngModel)]="adminservice.subpData.bathroom" 
+                        type="text" class="form-control"  
+                        placeholder="Enter No of Bathroom" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Select An Image</label><br />
+            <input type="file" #coverphoto accept="image/*" 
+            (change)="handleCoverPhoto($event.target.files)">
+            </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-NG btn-lg btn-block" 
+                    [disabled]="coverphoto.value == '' || subform.invalid">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> <br />

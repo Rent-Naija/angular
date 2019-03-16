@@ -1,0 +1,149 @@
+<div class="container" style="padding-top:20px;">
+  <div class="row">
+    
+      <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+          <!--get all comments-->
+          <form #form="ngForm" (submit)="getcomplains(form)" autocomplete="off">
+              <div class="form-group">
+                  <input type="hidden" name="userid"
+                  [(ngModel)]="userid" class="form-control">
+                  </div>
+            <div class="form-group">
+                <button type="submit" class="btn-NG btn-default-NG ">All Complains</button>
+                &nbsp;
+                <a (click)="writec()" style="color:white"  class="btn-NG btn-default-NG ">New Complain</a>
+              </div>
+            </form>
+            <!--beginning of thread of comments-->
+              <div *ngIf="userc">
+                 <b style="border-bottom:2px solid black">All Complains</b> 
+                  <div *ngFor="let c of userc">
+                
+                      <form #form="ngForm" (submit)="getcthread(form)" autocomplete="off">
+                          <div class="form-group">
+                              <input type="hidden" name="ticket_id"
+                              [(ngModel)]="c.ticket_id" class="form-control">
+                              </div>
+                        <div class="form-group text-left">
+                            <button type="submit" class="btn btn-block btn-default-NG " [disabled]="form.invalid">
+                                {{c.title}} <br />
+                               <span class="badge badge-success">{{c.status}} </span>
+                              
+                            </button>
+                          </div>
+                        </form>
+                  </div>
+              </div>
+              <div *ngIf="userc === null">
+                    dsdsd
+              </div>
+           
+
+                
+                
+         
+            
+
+      </div>
+
+      <div class="col-sm-8 shadow" style="padding-top:10px;" >
+
+          <div *ngIf="complaincontent" >
+              <div *ngIf="ticketdetail " >
+                  <p class="text-center" style="border-bottom:2px solid black">
+                    {{ticketdetail.title}} - {{ticketdetail.ticket_id}} </p>
+          <div class="alert alert-success" *ngIf="formsuccex">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Complain Sent
+                    </div>
+              <div style="height: 40%">
+                  <div *ngFor="let c of ticketcomment" >
+                      <div [class]="+userid === c.user_id  ? 'text-right' : 'text-left' ">
+                         {{c.comment}} - {{c.user_id}} 
+                      </div>
+                        
+                  </div>
+              </div>
+            
+              <!--comment box-->
+              <div style="border-top:2px solid black" >
+              <form #form="ngForm" (submit)="newComment(form)" autocomplete="off">
+                  <div class="form-group">
+                      <input type="hidden" name="user_id"
+                      [(ngModel)]="userid" class="form-control">
+                      </div>
+                  <div class="form-group">
+                      <input type="hidden" name="ticket_id"
+                      [(ngModel)]="ticketdetail.ticket_id" class="form-control">
+                      </div>
+                      
+                      <div class="input-group mb-3">
+                          <div class="custom-file">
+                              <input required name="comment" #comment="ngModel" [(ngModel)]="_service.complain.title" class="form-control">
+                          </div>
+                          <div class="input-group-append">
+                            <button type="submit" class=" input-group-text" [disabled]="form.invalid">Submit</button>
+                          </div>
+                        </div>
+                </form>
+              </div>
+              
+              </div><br /><br />
+          </div>
+
+        <div *ngIf="write" >
+                <h5>ADD COMPLAIN</h5>
+                <div class="alert alert-success" *ngIf="formsuccess">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Complain Sent
+                </div>
+                <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+                  <div class="form-group">
+                      <input type="hidden" name="userid"
+                      [(ngModel)]="userid" class="form-control">
+                      </div>
+                    <div class="form-group">
+                        <input type="hidden" name="status"
+                        [(ngModel)]="status" class="form-control">
+                        </div>
+                  <div class="form-group">
+                      <label>Title</label>
+                      <input required name="title" #title="ngModel" [(ngModel)]="_service.complain.title" class="form-control">
+                      <div class="alert alert-danger" *ngIf="title.invalid && title.touched"> This Field is required</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Category</label>
+                      <select required name="category_id" #category_id [(ngModel)]="_service.complain.category_id"
+                          class="form-control">
+                        <option *ngFor="let c of Category" [value]="c.id">
+                          {{c.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Priority</label>
+                      <select required name="priority" #priority [(ngModel)]="_service.complain.priority"
+                          class="form-control">
+                        <option *ngFor="let pri of Priority" [value]="pri.name">
+                          {{pri.name}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Property ID</label>
+                      <input required name="propertyid" #propertyid="ngModel" [(ngModel)]="_service.complain.propertyid" class="form-control">
+                      <div class="alert alert-danger" *ngIf="propertyid.invalid && propertyid.touched"> This Field is required</div>
+                    </div>
+                    <div class="form-group">
+                      <label>Message</label>
+                      <textarea  name="message" #message="ngModel" [(ngModel)]="_service.complain.message" class="form-control" rows="5" ></textarea>
+                      <div class="alert alert-danger" *ngIf="message.invalid && message.touched"> This Field is required</div>
+                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default-NG " [disabled]="form.invalid">Submit</button>
+                  </div>
+                </form><br /><br />
+        </div>
+          
+        </div>
+</div>

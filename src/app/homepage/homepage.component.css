@@ -1,0 +1,362 @@
+#header{
+    
+    
+    background-image: url(../../assets/imgs/rentnaija/header.svg);
+    height:500px;
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: bottom right;
+    padding-top: 10%;
+    margin: 0 0 0 0;
+}
+
+#header h3{
+    margin-left:10px;
+    font-weight:bold;
+    font-size: 30px;
+}
+.headertext{
+    padding-left:5%;
+}
+.searchform{
+    padding-top:100px;
+    display: flex;
+}
+.searchinput{
+    width:40%;
+    margin-left:5%;
+   
+    
+}
+#searchinput{
+  height:40px;
+  border-radius:50px;
+}
+
+#searchbutton{
+    margin-left:20px;
+    border-radius:50px;
+    width:100px;
+    
+}
+
+
+
+#register{
+ height:500px;
+ background-image: url(../../assets/imgs/rentnaija/register.svg);
+ background-repeat: no-repeat;
+ background-size:contain;
+ background-position: bottom left;
+ 
+ 
+}
+#register h1{
+    color:#33A568;
+    text-align: center;
+    
+}
+#register h3{
+    margin-left:500px;
+    margin-right:300px;
+    line-height: 1.2;
+    
+    display: block;
+    color:#36465d;
+    text-align: center;
+}
+
+#registercontent{
+    padding-top:100px;
+}
+
+#search{
+    height:500px;
+    background-image: url(../../assets/imgs/rentnaija/search.svg);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: bottom right;
+  
+}
+#search h1{
+    color:#33A568;
+    text-align: center;
+
+}
+#search h3{
+    margin-left:300px;
+    margin-right:500px;
+    line-height: 1.2;
+   
+    display: block;
+    color:#36465d;
+    text-align: center;
+}
+#searchcontent{
+    padding-top:100px;
+}
+#book{
+    height:500px;
+    background-image: url(../../assets/imgs/rentnaija/book.svg);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position: bottom left;
+    
+}
+#book h1{
+    color:#33A568;
+    text-align: center;
+
+}
+#book h3{
+    margin-left:500px;
+    margin-right:300px;
+    line-height: 1.2;
+    
+    display: block;
+    color:#36465d;
+    text-align: center;
+}
+
+#bookcontent{
+    padding-top:100px;
+}
+
+#howitworks{
+   background-image: url(../../assets/imgs/rentnaija/howitworks.svg);
+   
+}
+
+.howitworks{
+    text-align:center;
+    padding:5em 2% 5em 2%;
+    background-image:url(../../assets/imgs/rentnaija/howitworks.svg);
+    background-repeat:no-repeat;
+    background-size:30%;
+    background-position: center;
+    height:100px;
+    
+   
+  }
+  .howitworks h1{
+      display:inline-block;
+      color:#33A568;
+      margin:0 60px;
+      vertical-align: middle;
+  
+  }
+
+  .testimonies{
+      height: 500px;
+      background-color: #172A3A;
+  }
+  .subscribe{
+    height:200px;
+    
+  }
+  
+
+.subscribeform{
+   
+    margin-top:-170px;
+    display: flex;
+    align-items: center;
+  justify-content: center;
+}
+.subscribeinput{
+    width:500px;
+    margin-left:5%;
+   
+    
+}
+#subscribeinput{
+  height:40px;
+  border-radius:50px;
+}
+
+#subscribebutton{
+    margin-left:20px;
+    border-radius:50px;
+    width:100px;
+   background-color: #172A3A;
+   border-color: #172A3A; 
+}
+
+.partners{
+    height:300px;
+      background-color: #D7FEFF;
+      color:#172A3A;
+
+      align-items: center;
+      justify-content: center;
+      
+  }
+  .partners_h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .img-circle{
+    height: 200px;
+    width: 200px;
+    margin-left: 20%;
+}
+.download {
+    height:300px;
+    width: 200px;
+}
+
+
+  /*----responsive---*/
+@media only screen and (max-width:1000px) {
+   .download {
+       height:100px;
+       width:100px;
+   }
+    #header{
+        background-image: url(../../assets/imgs/rentnaija/header.svg);
+        height:400px;
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position: bottom right;
+        
+        margin: 0 0 0 0;
+    }
+    .howit{
+        text-align:center;
+        background-image:url(../../assets/imgs/rentnaija/howitworks.svg);
+        background-repeat:no-repeat;
+        margin-top:30px;
+        background-position: center;
+        
+       
+    }
+    .howit h1{
+        display:inline-block;
+        margin:0 50px;
+        font-size: 20px;
+    
+    }
+    #howitworks{
+        background-image: url(../../assets/imgs/rentnaija/howitworks.svg);
+        
+     }
+     
+     .howitworks{
+         text-align:center;
+         padding:3em 1% 3em 1%;
+         background-image:url(../../assets/imgs/rentnaija/howitworks.svg);
+         background-repeat:no-repeat;
+         background-size:30%;
+         background-position: center;
+        
+         
+        
+       }
+       .howitworks h1{
+           display:inline-block;
+           color:#33A568;
+           margin:0 60px;
+           font-size: 20px;
+           vertical-align: middle;
+       
+       }
+      
+      #register{
+        height:500px;
+        background-image: url(../../assets/imgs/rentnaija/mobile_register.svg);
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position: bottom left;
+        
+        
+       }
+       #register h1{
+           
+           text-align: center;
+           
+       }
+       #register h3{
+           margin-left:50px;
+           margin-right:50px;
+           line-height: 1.2;
+           
+           display: block;
+           color:#33A568;
+           text-align: center;
+       }
+       
+       #registercontent{
+           padding-top:500px;
+       }
+
+       #search{
+        height:500px;
+        margin-top:150px;
+        background-image: url(../../assets/imgs/rentnaija/mobile_search.svg);
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position: bottom right;
+      
+    }
+    #search h1{
+        
+        text-align: center;
+    
+    }
+    #search h3{
+        margin-left:50px;
+        margin-right:50px;
+        line-height: 1.2;
+       
+        display: block;
+        color:#33A568;
+        text-align: center;
+    }
+    #searchcontent{
+        padding-top:450px;
+    }
+
+       #book{
+        height:500px;
+        margin-top:250px;
+        background-image: url(../../assets/imgs/rentnaija/mobile_book.svg);
+        background-repeat: no-repeat;
+        background-size:contain;
+        background-position: bottom left;
+        
+    }
+    #book h1{
+        width:100%;
+    
+    }
+    #book h3{
+        margin-left:50px;
+        margin-right:50px;
+        line-height: 1.2;
+        
+        display: block;
+        color:#33A568;
+        text-align: center;
+    }
+    
+    #bookcontent{
+        padding-top:400px;
+    }
+    .testimonies{
+        height: 500px;
+        margin-top:200px;
+        background-color: #172A3A;
+    }
+    .img-circle{
+        height: 50px;
+        width: 60px;
+        margin-left: 40%;
+    }
+    .partners{
+        height:400px;
+          background-color: #D7FEFF;
+          color:#172A3A;
+          padding-left:10px;
+      }
+}

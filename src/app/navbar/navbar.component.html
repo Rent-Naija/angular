@@ -1,0 +1,41 @@
+<div class="header-NG" [style.backgroundColor]="!authservice.isLoggedIn() ? '#fff' : '#fff' ">
+  <div class="clearfix " >
+	<span class="float-left header-h3-btn ">
+				<a routerLink="/" *ngIf="!authservice.isLoggedIn()">
+					<span  style="font-size:25px;" 
+					[style.color]="!authservice.isLoggedIn() ? '#24b34a' : 'black' ">
+						<b>{{title}}</b>
+					</span>
+				</a>
+				<button type="button" class="navbar-toggle" *ngIf="authservice.isLoggedIn()"  data-toggle="collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<fa-icon icon="grip-lines"></fa-icon>
+				</button>
+	</span>
+    <span class="float-right header-h3-btn">
+			<span *ngIf="!authservice.isLoggedIn()">
+				<a routerLink="/" class="clone">View Properties</a>&nbsp;
+				<a routerLink="admin/addproperty" class="clone">List a property</a>&nbsp;
+				<a routerLink="/" class="clone">About Us</a>&nbsp;
+					<button 
+					routerLink="login" class="btn-NG btn-default-NG">Login</button>&nbsp;
+					<button  
+					routerLink="signup" class="btn-NG btn-default-NG">Register</button>
+					
+			</span>
+			
+			<span  *ngIf="authservice.isLoggedIn()" >
+				
+					<a  routerLink="/admin">
+	<fa-icon icon="user-circle"></fa-icon>	Hi, {{authservice.firstname}} {{authservice.lastname}}</a> &nbsp;
+	<button (click)="authservice.logout()" class="btn-NG btn-sm btn-danger">
+			<fa-icon icon="power-off"></fa-icon> LogOut</button>
+			</span>
+			
+					
+    </span>
+	</div>
+</div>
+
+
+	

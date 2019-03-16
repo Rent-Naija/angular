@@ -1,0 +1,330 @@
+<div class="container" style="padding-top:20px;">
+    <div class="row" *ngIf="step1">
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+            Add your property details
+            Please tell us a few details about the accommodation you’d like to list on RentNaija.
+        </div>
+        <div class="col-sm-8 shadow" style="padding-top:10px;">
+            <div class="alert alert-success" *ngIf="formsuccess">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Property Successfully Added!! 
+                <a *ngIf="newp" [routerLink]="['/admin/pp',newp]" 
+            class="btn-NG btn-default-NG btn-sm ">View Property</a>
+            </div>
+            <div class="alert alert-info alert-dismissible" *ngIf="formupdate">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success!</strong> Property Updated..
+            </div>
+            <form #form=ngForm 
+            (ngSubmit)="onSubmits(propertyid,name,ownerid,sagent,coverphoto,type,price,state,city,address,description)"
+                autocomplete="off">
+             
+                    <div class="form-group">
+                            <input name="propertyid" #propertyid="ngModel" 
+                            [(ngModel)]="selectedid" class="form-control"
+                                type="hidden">
+                        </div>
+                <div class="form-group">
+                    <label>Property Name</label>
+                    <input name="name" #name="ngModel" 
+                    [(ngModel)]="adminservice.pData.name" class="form-control"
+                        type="text" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstname" class="jumbo-p-NG">OwnerID:</label>
+                        <input name="ownerid" #ownerid [(ngModel)]="adminservice.pData.ownerid" 
+                        type="text" 
+                        class="form-control" id="firstname" 
+                        placeholder="Enter OwnerID" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastname" class="jumbo-p-NG">AgentID:</label>
+                        <input name="sagent" #sagent [(ngModel)]="adminservice.pData.sagent" 
+                        type="text" class="form-control" id="lastname" 
+                        placeholder="Enter AgentID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Select An Image</label><br />
+            <input type="file" #coverphoto accept="image/*" 
+            (change)="handleCoverPhoto($event.target.files)">
+            </div>
+                <div class="form-group">
+                    <label>Type:</label>
+                    <select name="type" #type [(ngModel)]="adminservice.pData.type"
+                        class="form-control">
+                      <option *ngFor="let t of Type" [value]="t.name">
+                        {{t.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                        <label>Price</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">&#8358;</span>
+                        </div>
+                        <input name="price" #price="ngModel" 
+                        [(ngModel)]="adminservice.pData.price"
+                        type="text" class="form-control" placeholder="Price" aria-describedby="basic-addon1">
+                        </div>
+                  </div>
+                  
+                  <input name="state" #state="ngModel" 
+                    [(ngModel)]="adminservice.pData.state" class="form-control"
+                    type="hidden">
+                <div class="form-row">
+                    <div class="form-group col-md-5" *ngIf="type.value == 'Hotel' || type.value == 'Rent'">
+                        <label>State</label>
+                        <input name="state" #state="ngModel" 
+                        [(ngModel)]="adminservice.pData.state" class="form-control"
+                            type="text">
+                    </div>
+                    <div class="form-group col-md-5" >
+                        <label *ngIf="type.value == 'Hotel' || type.value == 'Rent'">City</label>
+                        <label *ngIf="type.value == 'Hostel'" >School Name</label>
+                        <label *ngIf="type.value == null" >City/School Name</label>
+                        <input name="city" #city="ngModel" 
+                        [(ngModel)]="adminservice.pData.city" class="form-control"
+                            type="text" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label>Address</label>
+                        <input name="address" #address="ngModel" 
+                        [(ngModel)]="adminservice.pData.address" class="form-control"
+                            type="text" required>
+                    </div>
+                <div class="form-group">
+                    <label for="comment">Description:</label>
+                    <textarea name="description" #description="ngModel" 
+                    [(ngModel)]="adminservice.pData.description"
+                    class="form-control" rows="5" id="comment" name="text"></textarea>
+                  </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-NG btn-lg btn-block" [class.disabled]="disabled"
+                    [disabled]="coverphoto.value == '' || form.invalid">Next</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!--property info page-->
+    <div class="row" *ngIf="step2">
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255);padding-top:10px; ">
+            More Infomation About Your Property
+            This increase search result on your property on RentNaija.
+        </div>
+        <div class="col-sm-8 shadow" style="padding-top:10px;">
+            <div class="alert alert-success" *ngIf="formsuccess">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Property Successfully Added!! 
+               <!-- <a *ngIf="newp" [routerLink]="['/admin/pp',newp]" 
+            class="btn-NG btn-default-NG btn-sm ">View Property</a> -->
+            </div>
+            <h3>NEARBY</h3>
+            <form #forminfo=ngForm 
+            (ngSubmit)="submitinfo(forminfo)"
+                autocomplete="off">
+                <div class="form-group">
+                    <input name="propertyid" #propertyid="ngModel" 
+                    [(ngModel)]="newp" class="form-control"
+                        type="hidden" required>
+                </div>
+                
+                <div  class=" form-check "> 
+                     <label style="padding-right:40px">Hospital</label>   
+                    <label *ngFor="let m of Value" 
+                    class="form-check-label" style="padding-right:40px">
+                        <input name="hospital" ngModel 
+                        type="radio" class="form-check-input"
+                         [value]="m.id" required>
+                        {{m.name}}
+                    </label>
+
+                </div>
+                <div   class=" form-check ">
+                  <label style="padding-right:40px">Security Unit</label>
+                        <label *ngFor="let m of Value" 
+                        class="form-check-label" style="padding-right:40px">
+                            <input name="security" ngModel 
+                            type="radio" class="form-check-input"
+                                [value]="m.id" required>
+                            {{m.name}}
+                        </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Govenment Office</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="goffice" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id" required>
+                              {{m.name}}
+                          </label>
+                  </div>
+                <div   class=" form-check ">
+                <label style="padding-right:40px">Church</label>
+                        <label *ngFor="let m of Value" 
+                        class="form-check-label" style="padding-right:40px">
+                            <input name="church" ngModel 
+                            type="radio" class="form-check-input"
+                                [value]="m.id" required>
+                            {{m.name}}
+                        </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Mosque</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="mosque" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id">
+                              {{m.name}}
+                          </label>
+                  </div>
+                <div   class=" form-check ">
+                <label style="padding-right:40px">Gym Center</label>
+                        <label *ngFor="let m of Value" 
+                        class="form-check-label" style="padding-right:40px">
+                            <input name="gymcenter" ngModel 
+                            type="radio" class="form-check-input"
+                                [value]="m.id" required>
+                            {{m.name}}
+                        </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Hair Saloon</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="hairsaloon" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id">
+                              {{m.name}}
+                          </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Resturant</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="resturant" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id" required>
+                              {{m.name}}
+                          </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Hotel</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="hotel" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id" required>
+                              {{m.name}}
+                          </label>
+                </div>
+                <div   class=" form-check ">
+                    <label style="padding-right:40px">Market</label>
+                          <label *ngFor="let m of Value" 
+                          class="form-check-label" style="padding-right:40px">
+                              <input name="market" ngModel 
+                              type="radio" class="form-check-input"
+                                  [value]="m.id" required>
+                              {{m.name}}
+                          </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-NG btn-lg btn-block" 
+                    [disabled]=" forminfo.invalid">Next</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!--sub property page-->
+    <div class="row" *ngIf="step3">
+        <div class="col-sm-4" style="background-color:rgb(255, 255, 255) ;padding-top:10px;">
+            Add your property details
+            Please tell us a few details about the accommodation you’d like to list on RentNaija.
+        </div>
+        <div class="col-sm-8 shadow" style="padding-top:10px;">
+            <div class="alert alert-success" *ngIf="formsuccess">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Property Successfully Added!! 
+                <a *ngIf="newp" [routerLink]="['/admin/pp',newp]" 
+            class="btn-NG btn-default-NG btn-sm ">View Property</a>
+            <button class="btn-NG btn-default-NG btn-sm" (click)="resetSub()">Add Sub property</button>
+            </div>
+            <div class="alert alert-info alert-dismissible" *ngIf="subformsuccess">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Success!</strong> Sub Property Added
+            </div>
+            <form #subform=ngForm 
+            (ngSubmit)="submitSub(propertyid,subname,price, room, toilet, garage, bathroom, coverphoto)"
+                autocomplete="off">
+                <div class="form-group">
+                    <input name="propertyid" #propertyid="ngModel" 
+                    [(ngModel)]="newp" class="form-control"
+                        type="hidden" required>
+                </div>
+                <div class="form-group">
+                    <label>Sub Property Name</label>
+                    <input name="subname" #subname="ngModel" 
+                    [(ngModel)]="adminservice.subpData.name" class="form-control"
+                        type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Price</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">&#8358;</span>
+                    </div>
+                    <input name="price" #price="ngModel" 
+                    [(ngModel)]="adminservice.subpData.price"
+                    type="text" class="form-control" placeholder="Price" aria-describedby="basic-addon1">
+                    </div>
+              </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="jumbo-p-NG">Room:</label>
+                        <input name="room" #room [(ngModel)]="adminservice.subpData.room" 
+                        type="text" class="form-control" placeholder="Enter No of Rooms" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="jumbo-p-NG">Toilet:</label>
+                        <input name="toilet" #toilet [(ngModel)]="adminservice.subpData.toilet" 
+                        type="text" class="form-control" 
+                        placeholder="Enter no of Toilet" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label  class="jumbo-p-NG">Garage:</label>
+                        <input name="garage" #garage [(ngModel)]="adminservice.subpData.garage" 
+                        type="text" class="form-control" placeholder="Enter No of Garage" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="jumbo-p-NG">Bathroom:</label>
+                        <input name="bathroom" #bathroom [(ngModel)]="adminservice.subpData.bathroom" 
+                        type="text" class="form-control"  
+                        placeholder="Enter No of Bathroom" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Select An Image</label><br />
+            <input type="file" #coverphoto accept="image/*" 
+            (change)="handleCoverPhoto($event.target.files)">
+            </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-NG btn-lg btn-block" 
+                    [disabled]="coverphoto.value == '' || subform.invalid">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> <br />

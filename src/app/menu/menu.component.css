@@ -1,0 +1,26 @@
+
+.active-NG {
+    background-color:#DBFFFF;
+    color:#36465d;
+    /*width:100px;
+    border-style: solid; */
+    border-color: #36465d;
+}
+.active-NG a:visited {
+    color: #36465d;
+}
+
+.non-active-NG{
+    background-color:#F0FFFF;
+    color:#36465d;
+    /*border-style: solid; */
+    border-color: #36465d;
+}
+
+.non-active-NG a:visited {
+    color: black;
+}
+.non-active-NG a:hover {
+    color: #cff2b8;
+    background-color: #fff;
+}

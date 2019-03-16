@@ -1,0 +1,59 @@
+<div id="header">
+  <h3 class="headertext">Find A Perfect Accommodation Near You</h3>
+ 
+   <app-menu></app-menu>
+    
+    <form #f="ngForm" (ngSubmit)="submit(state,city,price)" class="form-inline searchform">
+        <input #state ngModel   name="state"  
+        (keyup)="filters(state.value)"   required type="text" 
+        class="form-control  searchinput"   placeholder="Where?">
+
+        <input #city ngModel  name="city"  (keyup)="filterc(city.value)" required  
+        type="text" class="form-control searchinput-NG" placeholder="Where?">
+
+        <input #price ngModel name="price"  (keyup)="filterp(price.value)" 
+        required type="number"  class="form-control searchinput-NG" placeholder="Price">
+        
+          <button type="submit" [disabled]="!f.valid" id="searchbutton" class="btn-NG jumbo-btn-default-NG ">Search</button>
+        
+   </form>
+
+</div>
+
+<div class="container ">
+    <h5 style="padding-top: 20px;">List Of Rent:
+     <button class="btn-NG jumbo-btn-default-NG  mb-1" (click)="viewall()">VIEW ALL</button></h5>
+    <div *ngIf="issearch">
+        <span><b>SEARCH RESULT FOR - State:</b> {{state.value}} <b>City:</b> {{city.value}} <b>Price:</b> N{{price.value}}</span>
+      </div>
+      <div class="row" style="margin-left:5px;margin-top:10px;">
+        <div class="row">
+         
+          <ng-container *ngFor="let p of filteredrents ; let i = index">
+            <div class="col" style="padding-bottom:10px;">
+                <div class="card" style="width: 16rem;" >
+                    <a [routerLink]="['/properties',p.type, p.viewid]"><img class="card-img-top" [src]="p.coverphoto" alt="Card image cap" height="200px"></a>
+                    <h5 class="card-title text-center">{{p.name}}</h5>
+                    
+                   
+                   <div class="card-body">
+                      <h5 class="card-content text-center">&#8358;{{p.price | number}}</h5>
+                      <a [routerLink]="['/properties',p.type, p.viewid]" class="btn-NG btn-default-NG btn-block">View Property</a>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="authservice.isLoggedIn()">
+                  <div *ngIf="(i + 1) % 3 === 0" class="w-100"></div>
+              </div>
+              <div *ngIf="!authservice.isLoggedIn()">
+                  <div *ngIf="(i + 1) % 4 === 0" class="w-100"></div>
+              </div>
+          </ng-container>
+          <div *ngIf="+filteredrents === 0" class="mx-auto">
+              <p class="text-center">No Propety To Show</p>
+            </div>
+				
+				</div>
+			</div>
+      <br />
+	</div>
