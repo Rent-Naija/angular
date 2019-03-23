@@ -1,8 +1,9 @@
 
 <div>
     
-  <admin-property-list *ngIf="roleid != 1"></admin-property-list>
+ 
   <app-tenants *ngIf="roleid == 1"></app-tenants>
+  <admin-property-list *ngIf="roleid != 1"></admin-property-list>
 
     <div *ngIf="!editing">
         <!-- Media middle -->

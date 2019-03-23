@@ -54,14 +54,24 @@ export class TenantsComponent implements OnInit {
           this.tenantid = amt.userid;
           this.tpropertyid = amt.propertyid;
           const one_day = 1000 * 60 * 60 * 24;
+          // this.tjoin = new Date(Date.parse(amt.created_at)); //date tenant join
           this.tjoin = new Date(amt.created_at); //date tenant join
+          console.log(this.tjoin.getMonth());
           this.todayDate = new Date();
-          console.log(this.todayDate);
-          this.lk = Math.ceil((this.tjoin.getTime() - this.todayDate.getTime())/(one_day));
+          console.log(this.todayDate.getMonth());
+          // console.log(one_day)
+          
+          this.lk = Math.ceil((this.todayDate.getTime() - this.tjoin.getTime() )/(one_day));
           console.log(this.lk); //store in variable and compare with positive
           this.test = this.lk;
-          this.try = Math.abs(this.lk) ;
-
+          
+          if( (this.tjoin.getMonth() === this.todayDate.getMonth())   ){
+            //if the month join and the today month is the same
+            this.try = Math.abs(this.lk + 365) ;
+          }else {
+            this.try = Math.abs(this.lk) ;
+          }
+          
         
         /*console.log(new Date(this.tjoin.setYear(this.tjoin.getYear() + 1)));
           this.todayDate = new Date();

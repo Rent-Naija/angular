@@ -12,7 +12,8 @@ import { HostelService } from 'src/app/services/hostel.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  selectedid: any;
+  propetyId;
+  subId;
   userid;
   clickedproperty;
   userdata;
@@ -31,11 +32,13 @@ export class BookComponent implements OnInit {
     private _service: HostelService) { 
       this.route.paramMap
         .subscribe(params => {
-        this.selectedid = +params.get('propertyid');
-        this.adminservice.getproperty(this.selectedid)
+        this.propetyId = +params.get('propertyid');
+        this.subId = +params.get('subpropertyid');
+        console.log(this.subId);
+        this.adminservice.getproperty(this.propetyId)
             .subscribe(response => { 
               this.clickedproperty = response.property;
-            console.log(response); });
+             });
       });
             this.authservice.signUser()
           .subscribe(data => {
@@ -53,7 +56,8 @@ export class BookComponent implements OnInit {
   }
 
   newBook(){
-    this.adminservice.newt(this.selectedid,this.userid)
+    //add new tenant to tenant table with propertyid, subpropertyid and userid
+    this.adminservice.newt(this.propetyId,this.subId,this.userid)
         .subscribe(res => {
       console.log(res);
       this.paymentsuccess = true;
@@ -62,27 +66,27 @@ export class BookComponent implements OnInit {
   }
 
 
-  paymentDone($event){
-    console.log($event);
-    if($event.response === 'Approved'){
-      this.paymentsuccess = true;
-     this.adminservice.newp(this.selectedid,this.userid,$event.response, $event.trans, $event.trxref)
-     .subscribe(res => {
-       console.log(res);
-     });
-        this.adminservice.newt(this.selectedid,this.userid)
-        .subscribe(res => {
-          console.log(res);
-        });
-    }
-    else{
-      console.log($event.response);
-      console.log($event.message);
-    };
-  }
+  // paymentDone($event){
+  //   console.log($event);
+  //   if($event.response === 'Approved'){
+  //     this.paymentsuccess = true;
+  //    this.adminservice.newp(this.propetyId,this.userid,$event.response, $event.trans, $event.trxref)
+  //    .subscribe(res => {
+  //      console.log(res);
+  //    });
+  //       this.adminservice.newt(this.propetyId,this.userid)
+  //       .subscribe(res => {
+  //         console.log(res);
+  //       });
+  //   }
+  //   else{
+  //     console.log($event.response);
+  //     console.log($event.message);
+  //   };
+  // }
 
-  paymentCancel(){
-    console.log("cancel");
-  }
+  // paymentCancel(){
+  //   console.log("cancel");
+  // }
 
 }

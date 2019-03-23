@@ -155,9 +155,10 @@ export class AdminService {
     return this.http.post<any>(this._url + '/admin/addpropertyinfo', propertyinfo, httpOptions1 );
   } 
 
-  newt(propertyid: string,userid: string): Observable<any>{
+  newt(propertyid: string, subId: string, userid: string): Observable<any>{
     const formData: FormData = new FormData();
     formData.append('propertyid', propertyid);
+    formData.append('subpropertyid', subId);
     formData.append('userid', userid);
     let token = localStorage.getItem('access_token');
     let k = "Bearer " + token;

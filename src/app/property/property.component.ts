@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { HostelService} from '../services/hostel.service';
 import { AuthService } from '../services/authservice.service';
 import { UserinfoService } from '../services/userinfo.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-property',
@@ -33,6 +34,7 @@ export class PropertyComponent implements OnInit {
   
 
   constructor(
+    private titleService: Title,
     private route: ActivatedRoute, 
     private _router: Router, 
     private userinfo: UserinfoService,
@@ -75,6 +77,7 @@ export class PropertyComponent implements OnInit {
       this.propertyImg = response.propertyimages;
       this.ownerid = this.property.ownerid;
       this.sagentid = this.property.sagentid;
+      this.titleService.setTitle(this.property[0].name + ' - ' + this.property[0].address + ' | RentNaija');
         });
   }
 

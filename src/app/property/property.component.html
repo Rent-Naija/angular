@@ -115,18 +115,20 @@
                   <li class="list-group-item" [class.disabled]="sub.available === '1'">
                       <div class="row">
                           <div class="col-sm-2">
-                              <img class="rounded-circle" [src]="subUrl+sub.coverphoto" alt="Card image cap" 
-                              height="100px">
+                              <img class="rounded-circle" 
+                              [src]="subUrl+sub.coverphoto" 
+                              alt="subproperty cover photo" 
+                              >
                               
                           </div>
-                          <div class="col">
+                          <div class="col book-content" >
                           <b>{{sub.name}} </b><br />
                           {{sub.room}} Room(s) <br />
                           {{sub.toilet}} Toilet(s) <br />
                           {{sub.bathroom}} Bathroom(s)
 
-                          <b *ngIf="sub.available === '1'"> - Occupied</b><br />
-                          <a *ngIf="sub.available === '0'" [routerLink]="['/book', p.id, sub.id]" 
+                          <b *ngIf="sub.available === '0'"> - Occupied</b><br />
+                          <a *ngIf="sub.available === '1'" [routerLink]="['/book', p.id, sub.id]" 
                   class="btn-NG btn-default-NG btn-sm">Book </a>
                           </div>
                       </div>

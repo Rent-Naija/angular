@@ -1,3 +1,21 @@
 .rounded-circle{
-    padding-right:50px;
+    margin-right:10px;
+    width: 204px;
+    margin-top:10px;
+    height: 136;
+}
+.book-content {
+    margin-top:20px;
+    padding-left:150px;
+}
+
+@media only screen and (max-width:1000px){
+    .rounded-circle{
+        margin-right:10px;
+        width: 104px;
+        height: 36;
+    }
+    .book-content {
+        padding-left:50px;
+    }  
 }
