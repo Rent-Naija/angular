@@ -17,8 +17,7 @@ export class TenantsComponent implements OnInit {
   tpropertyid;
   tjoin;
   checklength;
-
-    todayDate;
+  todayDate;
     try;
     lk;
     test;
@@ -46,30 +45,57 @@ export class TenantsComponent implements OnInit {
   ngOnInit() {
     this.rnusers();
   }
-
+  tenantDay(date){
+    
+  }
   tenantinfo(){
     this.adminservice.amTenant(this.userinfo.id)
         .subscribe(amt => { 
           this.iftenant = amt;
-          this.tenantid = amt.userid;
+          //process if tenant can id can be found
+          if(amt.userid){
+           //if tenants details are found
+           this.tenantid = amt.userid;
           this.tpropertyid = amt.propertyid;
           const one_day = 1000 * 60 * 60 * 24;
           // this.tjoin = new Date(Date.parse(amt.created_at)); //date tenant join
           this.tjoin = new Date(amt.created_at); //date tenant join
-          console.log(this.tjoin.getMonth());
+          
           this.todayDate = new Date();
-          console.log(this.todayDate.getMonth());
+          console.log(this.tjoin.toUTCString());
+          console.log(this.todayDate.toUTCString());
           // console.log(one_day)
           
           this.lk = Math.ceil((this.todayDate.getTime() - this.tjoin.getTime() )/(one_day));
           console.log(this.lk); //store in variable and compare with positive
           this.test = this.lk;
-          
+          console.log(this.lk);
           if( (this.tjoin.getMonth() === this.todayDate.getMonth())   ){
             //if the month join and the today month is the same
-            this.try = Math.abs(this.lk + 365) ;
+           //get today day - tenant join day
+            switch(this.todayDate.getDay() - this.tjoin.getDay()){
+              case 0:
+                this.try = Math.abs(this.lk + 365) ;
+                break;
+              case 1:
+                this.try = Math.abs(365 - this.lk) ;
+                break;
+              case 2:
+                this.try = Math.abs(365 - this.lk) ;
+                break;
+              case 3:
+                this.try = Math.abs(365 - this.lk) ;
+                break;
+              case 4:
+                this.try = Math.abs(365 - this.lk) ;
+                break;
+              default:
+                console.log('samy');
+            }
           }else {
             this.try = Math.abs(this.lk) ;
+          }
+          
           }
           
         
