@@ -1,7 +1,11 @@
 <div >
     <div *ngIf="tenantid != null ">
+       
         <div *ngIf="try > 15 " class="alert alert-info">
             You Have <strong>{{try}} Days</strong> Remaining <br />
+            <div class="progress">
+                <div class="progress-bar" style="width:10%"></div>
+              </div><br>
         </div>
         <div *ngIf="try <= 15 " class="alert alert-danger">
           You Have <strong>{{try}} Days</strong> Remaining <br />
@@ -45,7 +49,7 @@
     
 </div>
 
-<div *ngIf="iftenant === null || +iftenant === 0  ">
+<div *ngIf="!(tenantid)">
     <div class="alert alert-info">
         You Have Not <strong>Occupy Any Property</strong> Remaining 
     </div>
