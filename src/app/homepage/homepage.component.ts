@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HostelService} from '../services/hostel.service';
 import { Properties } from '../interfaces/properties';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/authservice.service';
 import { Title } from '@angular/platform-browser';
 import { Schools } from '../interfaces/schools';
@@ -25,10 +26,13 @@ isLoadingResults = true;
 
   constructor(
     private titleService: Title,
+    private router: Router,
     private authservice: AuthService,
     private school: Schools,
     private _service: HostelService) {
-
+      if(authservice.isLoggedIn()){
+        this.router.navigate(['/hostel']);
+      }
       this.titleService.setTitle('List of Hostels | RentNaija');
     this._service.getHostels()
     .subscribe(response => {
