@@ -24,29 +24,53 @@
                 </a>
             </li>
             <li routerLinkActive="active" >
-                <a routerLink="/admin">
-                  <p style="padding-right: 30px"><fa-icon icon="home"></fa-icon>
-                   Dashboard </p>
-                </a>
-            </li>
-            <li routerLinkActive="active" >
                 <a routerLink="/hostel">
                   <p style="padding-right: 30px"><fa-icon icon="search"></fa-icon>
                    Search </p>
                 </a>
             </li>
             <li routerLinkActive="active" >
-                <a routerLink="/admin">
+                <a routerLink="/myprofile">
                   <p style="padding-right: 30px"><fa-icon icon="heart" style="color: Tomato;" ></fa-icon>
-                   My Favourite </p>
+                   Favourites </p>
+                </a>
+            </li>
+            <li routerLinkActive="active" >
+                <a routerLink="/mypayment">
+                  <p style="padding-right: 30px"><fa-icon icon="home"></fa-icon>
+                   Payments </p>
                 </a>
             </li>
             <li routerLinkActive="active" >
                 <a routerLink="/admin">
-                  <p style="padding-right: 30px"><fa-icon icon="home"></fa-icon>
-                   Dashboard </p>
+                  <p style="padding-right: 30px"><fa-icon icon="user-circle"></fa-icon>
+                   My Profile </p>
                 </a>
             </li>
+            <li routerLinkActive="active" >
+                <a  data-target="#complains-menu" data-toggle="collapse">
+                    <p style="padding-right: 40px">
+                        <fa-icon icon="comments"></fa-icon>
+                        Complains </p>
+                </a>
+            </li>
+            <div id="complains-menu" class="collapse">
+                <li routerLinkActive="active" >
+                    <a routerLink="admin/complains">
+                        <p style="padding-right: 40px">
+                            <fa-icon icon="comments"></fa-icon>
+                            New </p>
+                    </a>
+                </li>
+                <li routerLinkActive="active" >
+                    <a routerLink="admin/complains">
+                        <p style="padding-right: 40px">
+                            <fa-icon icon="comments"></fa-icon>
+                            All complains </p>
+                    </a>
+                </li>
+            </div>
+           
           </div>
          <div *ngIf="authservice.roleid != 1">
                     <li routerLinkActive="active" >
@@ -70,13 +94,7 @@
           </div>
             
           
-          <li routerLinkActive="active" >
-            <a routerLink="admin/complains">
-                <p style="padding-right: 40px">
-                    <fa-icon icon="comments"></fa-icon>
-                    My Complains </p>
-            </a>
-        </li>
+        
        
           
 
