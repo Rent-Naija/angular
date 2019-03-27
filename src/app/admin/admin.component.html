@@ -2,8 +2,11 @@
 <div>
     
  
-  <app-tenants *ngIf="roleid == 1"></app-tenants>
-  <admin-property-list *ngIf="roleid != 1"></admin-property-list>
+  <app-tenants *ngIf="roleid == 1; else admin"></app-tenants>
+  <ng-template #admin>
+    <admin-property-list></admin-property-list>
+  </ng-template>
+  
 
     <div *ngIf="!editing">
         <!-- Media middle -->
