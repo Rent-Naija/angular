@@ -28,6 +28,7 @@ import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { Angular4PaystackModule} from 'angular4-paystack';
 
@@ -208,7 +209,9 @@ export class AppModule {
    */
   constructor() {
     library.add(
-faShower,faCar, faToilet, faBed,faCamera,faHeart,faCheckCircle,faEye,faAt,faGripLines,faHome,faCity,faGraduationCap,faBuilding,faUserCircle,faPowerOff,faMapMarker,faComments,faDoorOpen,faDoorClosed);
+faShower,faCar, faToilet, faBed,faCamera,faHeart,faCheckCircle,
+faEye,faAt,faGripLines,faHome,faCity,faGraduationCap,faBuilding,faUserCircle,
+faPowerOff,faMapMarker,faComments,faDoorOpen,faDoorClosed,faSearch);
     
   }
  }
