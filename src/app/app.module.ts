@@ -68,6 +68,8 @@ import { BookComponent } from './admin/book/book.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { TermsComponent } from './terms/terms.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { MyfavouriteComponent } from './admin/myfavourite/myfavourite.component';
+import { MypaymentComponent } from './admin/mypayment/mypayment.component';
 
 
 
@@ -98,7 +100,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     BookComponent,
     NotfoundComponent,
     TermsComponent,
-    HomepageComponent
+    HomepageComponent,
+    MyfavouriteComponent,
+    MypaymentComponent
   ],
   imports: [
     BrowserModule,
